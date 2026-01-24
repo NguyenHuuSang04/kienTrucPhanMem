@@ -1,0 +1,14 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "main": "consumer_advanced.js",
+  "scripts": {
+    "start": "node consumer_advanced.js",
+    "dev": "node --watch --watch-path=. consumer_advanced.js",
+    "basic": "node consumer.js",
+    "dlq": "node consumer_dlq.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.9"
+  }
+}
