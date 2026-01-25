@@ -1,0 +1,14 @@
+Lệnh 1 (Tạo khóa bí mật - Private Key):
+
+Bash
+openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+
+
+Lệnh 2 (Trích xuất khóa công khai - Public Key):
+
+Bash
+openssl rsa -pubout -in private.pem -out public.pem
+
+
+Token mẫu:
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTYW5nTmd1eWVuXzIxIiwibmFtZSI6Ik5ndXllbiBWYW4gU2FuZyIsImlhdCI6MTUxNjIzOTAyMn0.VMWGG7TYz_CE1FJk0necUNEbcppynm-MbVjJeMPa86xG128qRxCEbP58cLTwN7L5FSy3wQ8y6w8J2HiC4a048ksWE1UonqI-97RgF2aCgczxIrxT_W2Tf6rm5euIFNSt3FQnEo0G26yI1uQ1gkwyb2w8tNc9LugLJyK2Aks27n4WhsboYRwYg1jk53JYeRfy1OoE10Ekqs4LU9wmWJ-Mp9pas-WmGwzF8CyV1wJ7r6mhx25yZ6hlS_8B60KZ4spkpdm07irXhHdMcRxEXTvve2LbMX8gmnfsx1O7QuNR8Y-9FdARWspVwHEryE4MtuwWJB53xTH6_q0NfVerISEAJQ
