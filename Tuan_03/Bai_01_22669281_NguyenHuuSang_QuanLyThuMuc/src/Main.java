@@ -1,15 +1,28 @@
+import composite.FileSystemItem;
+import composite.Impl.File;
+import composite.Impl.Folder;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Tạo file
+        FileSystemItem file_1 = new File("baitap.java", 10);
+        FileSystemItem file_2 = new File("tailieu.pdf", 500);
+        FileSystemItem file_3 = new File("hinh_anh.png", 150);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        //tạo thư mục ocn
+        Folder subFolder = new Folder("DoAn_MonHoc");
+        subFolder.add(file_1);
+        subFolder.add(file_2);
+
+        //Tạo thư mục cha ( root )
+        Folder root = new Folder("C_Drive");
+        root.add(subFolder);
+        root.add(file_3);
+
+        //Hiển thị cấu trúc cây
+        System.out.println("Cấu trúc cây");
+        root.showDetails("");
     }
 }
