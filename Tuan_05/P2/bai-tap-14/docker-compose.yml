@@ -1,0 +1,18 @@
+services:
+  app-a:
+    image: alpine
+    container_name: container-a
+    networks:
+      - my-private-network
+    command: sleep infinity # Giữ cho container luôn chạy
+
+  app-b:
+    image: alpine
+    container_name: container-b
+    networks:
+      - my-private-network
+    command: sleep infinity
+
+networks:
+  my-private-network: # Khai báo mạng riêng
+    driver: bridge
