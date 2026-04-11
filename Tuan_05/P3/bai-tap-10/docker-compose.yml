@@ -1,0 +1,75 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: bt10_traefik
+    restart: always
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --log.level=DEBUG
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - "8083:80"
+      - "8084:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy_network
+
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    container_name: bt10_flask
+    restart: always
+    networks:
+      - proxy_network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.flask.rule=Host(`flask.localhost`)
+      - traefik.http.routers.flask.entrypoints=web
+      - traefik.http.services.flask.loadbalancer.server.port=5000
+
+  wordpress-db:
+    image: mariadb:11
+    container_name: bt10_wp_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+    volumes:
+      - wp_db_data_bt10:/var/lib/mysql
+    networks:
+      - proxy_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: bt10_wordpress
+    restart: always
+    depends_on:
+      - wordpress-db
+    environment:
+      WORDPRESS_DB_HOST: wordpress-db:3306
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - proxy_network
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=bai-tap-10_proxy_network
+      - traefik.http.routers.wp-router.rule=Host(`wp.localhost`)
+      - traefik.http.routers.wp-router.entrypoints=web
+      - traefik.http.routers.wp-router.service=wp-svc
+      - traefik.http.services.wp-svc.loadbalancer.server.port=80
+
+volumes:
+  wp_db_data_bt10:
+
+networks:
+  proxy_network:
+    driver: bridge
