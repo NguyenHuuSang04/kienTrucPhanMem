@@ -1,0 +1,16 @@
+services:
+  db-mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  node-app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db-mysql
