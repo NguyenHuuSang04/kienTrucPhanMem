@@ -1,0 +1,7 @@
+version: "3.8" # Phiên bản cấu trúc của Docker Compose
+
+services:
+  web-nginx: # Tên dịch vụ (do bạn tự đặt)
+    image: nginx:latest # Sử dụng Image Nginx bản mới nhất từ Docker Hub
+    ports:
+      - "8080:80" # Map cổng: <Máy_Host>:<Trong_Container>

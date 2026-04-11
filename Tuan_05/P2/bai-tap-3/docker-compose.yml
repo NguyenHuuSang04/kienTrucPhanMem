@@ -1,0 +1,21 @@
+services:
+  db-mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db-mysql # Kết nối đến tên service của database
+      PMA_USER: root # Hoặc dùng 'user'
+      PMA_PASSWORD: rootpassword # Hoặc dùng 'password'
+    depends_on:
+      - db-mysql # Đảm bảo MySQL khởi động trước
