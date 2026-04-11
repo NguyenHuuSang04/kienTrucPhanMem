@@ -1,0 +1,59 @@
+services:
+  vote:
+    image: dockersamples/examplevotingapp_vote
+    container_name: bt5_vote
+    restart: always
+    ports:
+      - "5000:80"
+    depends_on:
+      - redis
+    networks:
+      - voting_network
+
+  result:
+    image: dockersamples/examplevotingapp_result
+    container_name: bt5_result
+    restart: always
+    ports:
+      - "5001:80"
+    depends_on:
+      - db
+    networks:
+      - voting_network
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    container_name: bt5_worker
+    restart: always
+    depends_on:
+      - redis
+      - db
+    networks:
+      - voting_network
+
+  redis:
+    image: redis:alpine
+    container_name: bt5_redis
+    restart: always
+    networks:
+      - voting_network
+
+  db:
+    image: postgres:15-alpine
+    container_name: bt5_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - voting_network
+
+volumes:
+  postgres_data:
+
+networks:
+  voting_network:
+    driver: bridge
