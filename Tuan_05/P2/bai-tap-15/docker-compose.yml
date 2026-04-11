@@ -1,0 +1,14 @@
+services:
+  limited-redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50" # Giới hạn tối đa 50% CPU của 1 nhân
+          memory: 128M # Giới hạn tối đa 128MB RAM
+        reservations:
+          cpus: "0.25" # Đảm bảo luôn có ít nhất 25% CPU
+          memory: 64M # Đảm bảo luôn có ít nhất 64MB RAM
