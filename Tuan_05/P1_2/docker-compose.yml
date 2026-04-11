@@ -1,0 +1,7 @@
+services:
+  web-app:
+    build: . # Dấu chấm nghĩa là build dựa trên Dockerfile ở thư mục hiện tại
+    ports:
+      - "8080:80"
+  cache-db:
+    image: redis:latest # Cái này dùng image có sẵn nên lệnh build sẽ bỏ qua
