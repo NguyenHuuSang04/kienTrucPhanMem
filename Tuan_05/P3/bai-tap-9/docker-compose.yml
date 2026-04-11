@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: bt9_mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - cloud_network
+
+  redis:
+    image: redis:alpine
+    container_name: bt9_redis
+    restart: always
+    networks:
+      - cloud_network
+
+  nextcloud:
+    image: nextcloud:latest
+    container_name: bt9_nextcloud
+    restart: always
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "80:80"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: db
+      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
+      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_HOST_PORT: 6379
+    volumes:
+      - nextcloud_data:/var/www/html
+    networks:
+      - cloud_network
+
+volumes:
+  db_data:
+  nextcloud_data:
+
+networks:
+  cloud_network:
+    driver: bridge
