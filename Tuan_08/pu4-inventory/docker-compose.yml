@@ -1,0 +1,38 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: flashsale-redis
+    command: redis-server --protected-mode no --bind 0.0.0.0
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  redis-seeder:
+    image: redis:7-alpine
+    container_name: flashsale-redis-seeder
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./infra/redis-seed.sh:/seed.sh:ro
+    entrypoint: ["sh", "/seed.sh"]
+    restart: "no"
+
+  app:
+    build: .
+    container_name: pu4-inventory
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8084:8084"
+    environment:
+      SERVER_PORT: 8084
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    restart: unless-stopped

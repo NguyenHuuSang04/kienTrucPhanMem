@@ -1,0 +1,11 @@
+server:
+  port: ${SERVER_PORT:8084}
+
+spring:
+  application:
+    name: pu4-inventory
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms

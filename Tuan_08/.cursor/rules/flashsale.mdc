@@ -1,0 +1,28 @@
+---
+description: Flash Sale SBA project rules
+alwaysApply: true
+---
+
+# Flash Sale SBA — Cursor Rules
+
+Đây là project Chương 7 — **Space-Based Architecture**. Trước khi viết bất kỳ code nào:
+
+1. Đọc `ai-agent/README.md` để biết thứ tự đọc các tài liệu.
+2. Đọc `ai-agent/context/architecture.md` + `ai-agent/context/api.md` + `ai-agent/context/data-grid.md`.
+3. Tuân thủ `ai-agent/core/rules/sba.md` — **không gọi DB**, chỉ Redis.
+
+## Bảng phân công
+
+| Service | IP:Port | Member |
+|---|---|---|
+| PU1 Product | 192.168.137.157:8081 | Huy |
+| PU2 Cart | 192.168.137.184:8082 | Hiền |
+| PU3 Order | 192.168.137.20:8083 | Thái |
+| PU4 Inventory + Redis | 192.168.137.98:8084 / 6379 | Sang |
+| Frontend | 192.168.137.41:3000 | Trường |
+
+## Cấm
+
+- Thêm `spring-boot-starter-data-jpa`, `jdbc`, `mysql`, `postgresql` vào `pom.xml`.
+- Sửa code trong folder của member khác (trừ khi user chỉ định rõ).
+- Hardcode IP của PU khác trong code; dùng env var (`VITE_PU?_URL` / `REDIS_HOST`).

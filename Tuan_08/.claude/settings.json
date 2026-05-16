@@ -1,0 +1,63 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(git branch *)",
+      "Bash(git pull *)",
+      "Bash(git push origin *)",
+      "Bash(git stash *)",
+      "Bash(git merge *)",
+      "Bash(git tag *)",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)",
+      "Bash(npm ci)",
+      "Bash(npm list *)",
+      "Bash(npm create *)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npx prettier *)",
+      "Bash(curl *)",
+      "Bash(redis-cli *)",
+      "Bash(mvn *)",
+      "Bash(./mvnw *)",
+      "Bash(.\\mvnw *)",
+      "Bash(.\\mvnw.cmd *)",
+      "Bash(docker ps *)",
+      "Bash(docker logs *)",
+      "Bash(docker build *)",
+      "Bash(docker run *)",
+      "Bash(docker compose *)",
+      "Bash(docker-compose up *)",
+      "Bash(docker-compose down)",
+      "Bash(docker-compose logs *)",
+      "Bash(docker-compose ps)",
+      "Bash(docker-compose restart *)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(npm publish *)",
+      "Bash(docker compose down --volumes*)",
+      "Bash(docker-compose down --volumes*)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -Command \"[console]::beep(800, 300)\""
+          }
+        ]
+      }
+    ]
+  }
+}

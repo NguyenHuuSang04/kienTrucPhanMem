@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: pu1-product
+  data:
+    redis:
+      host: ${REDIS_HOST:192.168.137.98}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+
+logging:
+  level:
+    root: INFO
+    vn.iuh.flashsale: INFO

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(Get-ChildItem -Path \"d:\\\\IUH\\\\cong-nghe-moi\\\\bai-tap-nhom\\\\zalogram\\\\backend\" -Recurse -Include \"*.json\", \"*.js\", \"*.ts\", \"*.yml\", \"*.yaml\" -File)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "Bash(Get-ChildItem -Path \"d:\\\\IUH\\\\cong-nghe-moi\\\\bai-tap-nhom\\\\zalogram\\\\backend\" -Force)",
+      "Bash(Get-ChildItem -Path \"d:\\\\IUH\\\\cong-nghe-moi\\\\bai-tap-nhom\\\\zalogram\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(Get-ChildItem -Path \"d:\\\\IUH\\\\cong-nghe-moi\\\\bai-tap-nhom\\\\zalogram\\\\backend\\\\src\\\\modules\\\\newsfeed\" -ErrorAction SilentlyContinue)",
+      "Bash(Get-ChildItem -Path \"d:\\\\IUH\\\\cong-nghe-moi\\\\bai-tap-nhom\\\\zalogram\\\\frontend\\\\src\\\\components\\\\ui\" -Name)",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\IUH\\\\kien-truc-phan-mem\\\\bai-tap-nhom\\\\chuong-7\" -Recurse -Force | Where-Object { $_.FullName -notmatch '\\(node_modules|\\\\.git\\)' } | ForEach-Object { $_.FullName.Replace\\(\"d:\\\\IUH\\\\kien-truc-phan-mem\\\\bai-tap-nhom\\\\chuong-7\\\\\", \"\"\\) } | Sort-Object)",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\IUH\\\\kien-truc-phan-mem\\\\bai-tap-nhom\\\\chuong-7\" -Directory | Where-Object { $_.Name -notmatch '^\\\\.' })",
+      "PowerShell(ls -Path \"d:\\\\IUH\\\\kien-truc-phan-mem\\\\bai-tap-nhom\\\\chuong-7\\\\ai-agent\\\\\" -Recurse -File | Where-Object { $_.Length -gt 0 } | Select-Object FullName, @{Name=\"SizeKB\";Expression={[Math]::Round\\($_.Length/1KB, 2\\)}} | Format-Table -AutoSize)",
+      "Bash(rm -rf \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/skills/hamtech-ai-agent\" \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/skills/hamtech-bugfix\" \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/skills/hamtech-feature\" \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/skills/hamtech-optimize\" \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/skills/shadcn\")",
+      "Bash(rm \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/hooks/lint-on-save.ps1\" \"d:/IUH/kien-truc-phan-mem/bai-tap-nhom/chuong-7/.claude/hooks/typecheck-before-commit.ps1\")"
+    ],
+    "additionalDirectories": [
+      "d:\\IUH\\kien-truc-phan-mem\\bai-tap-nhom\\chuong-7\\.claude\\skills\\hamtech-ai-agent",
+      "d:\\IUH\\kien-truc-phan-mem\\bai-tap-nhom\\chuong-7\\.claude\\hooks"
+    ]
+  }
+}

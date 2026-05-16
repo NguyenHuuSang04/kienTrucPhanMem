@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: pu3-order
+    ports:
+      - "8083:8083"
+    environment:
+      SERVER_PORT: 8083
+      REDIS_HOST: ${REDIS_HOST:-192.168.137.98}
+      REDIS_PORT: 6379
+      INVENTORY_URL: ${INVENTORY_URL:-http://192.168.137.98:8084}
+    restart: unless-stopped
